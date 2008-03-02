@@ -1,13 +1,13 @@
 package Module::Pragma;
 
-use 5.010_00;
+use 5.010_000;
 
 use strict;
 use warnings;
 
 #use Smart::Comments; # for debugging
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my %register  = ();
 
@@ -60,9 +60,6 @@ sub enabled
 sub hint
 {
 	my($class, $level) = @_;
-
-#	my $hint_hash = ( caller ++$level )[10];
-#	return $hint_hash->{$class};
 
 	my $hint_hash;
 	my $bits;
@@ -282,7 +279,7 @@ Module::Pragma - Support for implementation of pragmas
 
 =head1 DESCRIPTION
 
-With perl 5.10.0 you can write pragma modules,
+With perl 5.10.0 you can write lexical pragma modules,
 which influence some aspect of the compile time or run time behavior of Perl
 programs. Module::Pragma helps to write such a module.
 
@@ -317,8 +314,8 @@ Here you have finished setting up a new pragma. It's used like other pragmas.
 
 	use mypragma 'foo';
 	use mypragma 'baz';     # 'foo' and 'baz' are exclusive;
-	                        #  'foo' flag removed and 'bar' set on.
-	use mypragma ':foobar'; # 'bar' removed and 'foo' set on.
+	                        #  'foo' removed and 'baz' set on.
+	use mypragma ':foobar'; # 'baz' removed ,and 'foo' and 'bar' set on.
 
 This pragma requires explicit arguments and refuses unknown tags by
 default.
@@ -351,12 +348,12 @@ For example:
 	); # -> returns 0b00010 (corresponding to 'E')
 
 Cannot register those which begin with triple underscores, because they are
-reseaved for Module::Pragma internals.
+reserved for Module::Pragma internals.
 
 =item PRAGMA->register_bundle(bundlename => tags...)
 
-Makes a bundle of I<tags>. When using the bundle, add a semicolon to the
-I<bundlename> as the prefix.
+Makes a bundle of I<tags>.  To use the bundle, add a semicolon to the
+I<bundlename> as a prefix.
 
 =item PRAGMA->register_exclusive(tags...)
 
@@ -374,7 +371,7 @@ Checks at the run time whether I<tags> are in effect. If no argument is
 supplied, it returns the state of I<PRAGMA>.
 
 When scalar context (including bool context) is wanted then it returns an
-integer, otherwise it returns a list of the tags;
+integer, otherwise it returns a list of the tags enabled;
 
 =back
 
@@ -384,7 +381,7 @@ C<Module::Pragma> itself do nothing on C<import()> nor C<unimport()>. They work
 only when called as methods of subclass;
 
 These two methods call C<check_exclusive()>, so if exclusive tags are
-supplied, they will C<_die()>.
+supplied at the same time, it will cause C<_die()>.
 
 =over 4
 
@@ -392,7 +389,7 @@ supplied, they will C<_die()>.
 
 Enables I<tags> and disables the exclusive tags.
 
-If no argument list is suplied, it calls C<default_import()>, and if it don't
+If no argument list is suplied, it calls C<default_import()>, and if it doesn't
 C<_die()> then it will use the return value as the arguments.
 
 =item PRAGMA->unimport(tags...)
@@ -412,13 +409,13 @@ There are some exception handlers which are overridable.
 =item PRAGMA->default_import( )
 
 Called in C<import()> when the arguments are not supplied. It will
-C<_die()> by default. So if needed, override it. The return values are used as
-the arguments of C<import()>.
+C<_die()> by default. So if needed, you can override it. The return values are
+used as the arguments of C<import()>.
 
 =item PRAGMA->unknown_tag(tagname)
 
 Called in C<tag()> when an unknown I<tagname> is found. It will C<_die()> by
-default. To change the behavior, overridable it. Expected to return an integer
+default. To change the behavior, override it. Expected to return an integer
 used as a bitmask.
 
 =back
@@ -448,7 +445,7 @@ If I<tagname> is unregistered, it will call C<unknown_tag()> with I<tagname>.
 
 Returns all the registered tags.
 
-Tags beginning with double underscores  are ignored.
+Note that tags beginning with double underscores are ignored.
 
 =item PRAGMA->pack_tags(tags...)
 
@@ -464,7 +461,7 @@ Returns tags which are exclusive to I<tags>.
 
 =item PRAGMA->check_exclusive(tags...)
 
-Checks whether I<tags> are exclusive and if so, calls C<_die()>.
+Checks whether I<tags> are exclusive and if so, causes C<_die()>.
 
 =back
 
@@ -514,11 +511,11 @@ See L<perlpragma> for the internal details.
 
 =head1 AUTHOR
 
-Goro Fuji (藤 吾郎) C<< <gfuji(at)cpan.org > >>
+Goro Fuji (藤 吾郎) C<< <gfuji(at)cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2007 Goro Fuji.
+Copyright (c) 2008 Goro Fuji.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

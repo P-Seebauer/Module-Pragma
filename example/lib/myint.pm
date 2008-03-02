@@ -1,4 +1,5 @@
-package myint;
+package
+	myint;
 
 use strict;
 use warnings;

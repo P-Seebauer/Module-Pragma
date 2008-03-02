@@ -1,4 +1,5 @@
-package MyMaths;
+package
+	MyMaths;
 
 use warnings;
 use strict;

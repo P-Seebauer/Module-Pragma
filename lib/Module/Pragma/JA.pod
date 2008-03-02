@@ -1,9 +1,8 @@
-
 =encoding UTF-8
 
 =head1 NAME
 
-Module::Pragma - プラグマモジュールの実装のサポート
+Module::Pragma::JA - プラグマモジュールの実装のサポート
 
 =head1 SYNOPSIS
 
@@ -237,7 +236,7 @@ Goro Fuji (藤 吾郎) C<< <gfuji(at)cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2007 Goro Fuji.
+Copyright (c) 2008 Goro Fuji.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

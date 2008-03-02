@@ -1,4 +1,5 @@
-package less;
+package
+	less;
 use strict;
 
 our $VERSION = '2.00';
