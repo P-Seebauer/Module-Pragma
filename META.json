@@ -1,0 +1,36 @@
+{
+   "abstract" : "Support for implementation of pragmas",
+   "author" : [
+      "Goro Fuji <gfuji(at)cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.42, CPAN::Meta::Converter version 2.131560",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Module-Pragma",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {}
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "repository" : {
+        "type" : "git",
+	"url" : "https://github.com/gitpan/Module-Pragma.git",
+	"web" : "https://github.com/gitpan/Module-Pragma"
+      }
+   }
+
+   "version" : "0.02"
+}
