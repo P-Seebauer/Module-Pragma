@@ -83,7 +83,7 @@ is_deeply [sort extest->tags], [sort -zero, -foo, -bar, -baz], "non ascii tag na
 is(extest->tag(-foo), 1);
 
 is_deeply([extest->unpack_tags(0)], [-zero], 'unpack_tags(0) -> -zero');
-is_deeply([extest->exclusive_tags(-zero)], [-foo, -bar, -baz], 'exclusive_tags(-zero)');
+is_deeply([sort extest->exclusive_tags(-zero)], [sort -foo, -bar, -baz], 'exclusive_tags(-zero)');
 
 {
 	package overflow_test;
